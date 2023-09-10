@@ -44,10 +44,11 @@ struct ContentView: View {
     VStack {
       Text("Color Picker")
         .font(.largeTitle)
+        .fontWeight(.bold)
 
       RoundedRectangle(cornerRadius: 0)
         .foregroundColor(foregroundColor)
-        .border(.black)
+        .border(Color.brown, width: 6)
       VStack {
         Text("Red")
         HStack {
