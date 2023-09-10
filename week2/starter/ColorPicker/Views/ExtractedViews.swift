@@ -44,7 +44,7 @@ struct MainColorView: View {
       
       RoundedRectangle(cornerRadius: 0)
         .foregroundColor(foregroundColor)
-        .border(Color.brown, width: 5)
+        .border(Color.brown, width: Constants.General.borderWidth)
     }
   }
 }
@@ -86,9 +86,9 @@ struct SetColorButtonView: View {
       }
     )
     .overlay(
-      RoundedRectangle(cornerRadius: 21)
-        .strokeBorder(Color.white, lineWidth: 2)
+      RoundedRectangle(cornerRadius: Constants.General.buttonCornerRadius)
+        .strokeBorder(Color.white, lineWidth: Constants.General.buttonLineWidth)
     )
-    .cornerRadius(21)
+    .cornerRadius(Constants.General.buttonCornerRadius)
   }
 }

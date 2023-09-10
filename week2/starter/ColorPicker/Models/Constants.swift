@@ -34,6 +34,8 @@ import Foundation
 
 enum Constants {
   enum General {
-    public static let cornerRadius = CGFloat(21)
+    public static let buttonCornerRadius = CGFloat(21)
+    public static let buttonLineWidth = CGFloat(2)
+    public static let borderWidth = CGFloat(5)
   }
 }
