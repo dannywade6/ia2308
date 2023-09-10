@@ -41,46 +41,37 @@ struct ContentView: View {
   
   // My work
   @State private var colorSelection = ColorSelection()
-
+  
   var body: some View {
-
+    
     VStack {
-      Text("Color Picker")
-        .font(.largeTitle)
-        .fontWeight(.bold)
-
-      RoundedRectangle(cornerRadius: 0)
-        .foregroundColor(foregroundColor)
-        .border(Color.brown, width: 6)
-      
+      MainColorView(title: "Color Picker", foregroundColor: $foregroundColor)
       SliderView(sliderValue: $redColor, colorName: "Red")
         .tint(.red)
       SliderView(sliderValue: $greenColor, colorName: "Green")
         .tint(.green)
       SliderView(sliderValue: $blueColor, colorName: "Blue")
         .tint(.blue)
-      
-      Button {
-        foregroundColor = Color(red: colorSelection.red / 255, green: colorSelection.green / 255, blue: colorSelection.blue / 255)
-      } label: {
-        Text("Set Color")
-          .padding()
-          .foregroundColor(.white)
-      }
-      .background(
-        ZStack {
-          Color.blue
-          LinearGradient(gradient: Gradient(colors: [Color.white.opacity(0.3), Color.clear]), startPoint: .top, endPoint: .bottom)
-        }
-      )
-      .overlay(
-          RoundedRectangle(cornerRadius: 21)
-            .strokeBorder(Color.white, lineWidth: 2)
-          )
-      .cornerRadius(21)
+      SetColorButtonView(redColor: $redColor, greenColor: $greenColor, blueColor: $blueColor, foregroundColor: $foregroundColor)
     }
     .padding(20)
+  }
+}
 
+struct MainColorView: View {
+  var title: String
+  @Binding var foregroundColor: Color
+  
+  var body: some View {
+    VStack {
+      Text("Color Picker")
+        .font(.largeTitle)
+        .fontWeight(.bold)
+      
+      RoundedRectangle(cornerRadius: 0)
+        .foregroundColor(foregroundColor)
+        .border(Color.brown, width: 5)
+    }
   }
 }
 
@@ -91,6 +82,7 @@ struct SliderView: View {
   var body: some View {
     VStack {
       Text(colorName)
+        .padding(.bottom, 2)
       HStack {
         Slider(value: $sliderValue, in: 0...255)
         Text("\(Int(sliderValue.rounded()))")
@@ -99,21 +91,34 @@ struct SliderView: View {
   }
 }
 
-//struct SliderView: View {
-//  @Binding var colorSelection: ColorSelection
-//  var colorName: String
-//  
-//  var body: some View {
-//    VStack {
-//      Text(colorName)
-//      HStack {
-//        Slider(value: $colorSelection, in: 0...255)
-//          .tint(Color.red)
-//        Text("\(Int(colorSelection.rounded()))")
-//      }
-//    }
-//  }
-//}
+struct SetColorButtonView: View {
+  @Binding var redColor: Double
+  @Binding var greenColor: Double
+  @Binding var blueColor: Double
+  @Binding var foregroundColor: Color
+  
+  var body: some View {
+    Button {
+      foregroundColor = Color(red: redColor / 255, green: greenColor / 255, blue: blueColor / 255)
+    } label: {
+      Text("Set Color")
+        .padding()
+        .foregroundColor(.white)
+    }
+    .background(
+      ZStack {
+        Color.blue
+        LinearGradient(gradient: Gradient(colors: [Color.white.opacity(0.3), Color.clear]), startPoint: .top, endPoint: .bottom)
+      }
+    )
+    .overlay(
+      RoundedRectangle(cornerRadius: 21)
+        .strokeBorder(Color.white, lineWidth: 2)
+    )
+    .cornerRadius(21)
+  }
+}
+
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
@@ -123,7 +128,6 @@ struct ContentView_Previews: PreviewProvider {
       ContentView()
         .preferredColorScheme(.dark)
         .previewDisplayName("Dark Mode")
-//    SliderView()
     }
   }
 }
