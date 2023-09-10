@@ -33,14 +33,10 @@
 import SwiftUI
 
 struct ContentView: View {
-  @State private var alertIsVisible: Bool = false
   @State private var redColor: Double = 0.0
   @State private var greenColor: Double = 0.0
   @State private var blueColor: Double = 0.0
   @State private var foregroundColor = Color(red: 0, green: 0, blue: 0)
-  
-  // My work
-  @State private var colorSelection = ColorSelection()
   
   var body: some View {
     
