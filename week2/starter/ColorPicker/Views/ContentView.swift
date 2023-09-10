@@ -33,10 +33,10 @@
 import SwiftUI
 
 struct ContentView: View {
-  @State private var redColor: Double = 0.0
-  @State private var greenColor: Double = 0.0
-  @State private var blueColor: Double = 0.0
-  @State private var foregroundColor = Color(red: 0, green: 0, blue: 0)
+  @State private var redColor: Double = 250.0
+  @State private var greenColor: Double = 100.0
+  @State private var blueColor: Double = 50.0
+  @State private var foregroundColor = Color(red: 250 / 255, green: 100 / 255, blue: 50 / 255)
   
   var body: some View {
     
