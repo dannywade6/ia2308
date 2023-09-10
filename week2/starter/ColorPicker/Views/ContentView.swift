@@ -38,6 +38,9 @@ struct ContentView: View {
   @State private var greenColor: Double = 0.0
   @State private var blueColor: Double = 0.0
   @State private var foregroundColor = Color(red: 0, green: 0, blue: 0)
+  
+  // My work
+  @State private var colorSelection = ColorSelection()
 
   var body: some View {
 
@@ -97,6 +100,20 @@ struct ContentView: View {
   }
 }
 
+//struct SliderView: View {
+//  @Binding var
+//  var body: some View {
+//    VStack {
+//      Text("Red")
+//      HStack {
+//        Slider(value: $redColor, in: 0...255)
+//          .tint(Color.red)
+//        Text("\(Int(redColor.rounded()))")
+//      }
+//    }
+//  }
+//}
+
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     Group {
@@ -105,6 +122,7 @@ struct ContentView_Previews: PreviewProvider {
       ContentView()
         .preferredColorScheme(.dark)
         .previewDisplayName("Dark Mode")
+//    SliderView()
     }
   }
 }
