@@ -36,4 +36,10 @@ struct ColorSelection {
   var red: Double = 0.2
   var blue : Double = 0.5
   var green: Double = 0.8
+  
+  mutating func setColor(redSliderValue: Double, greenSliderValue: Double, blueSliderValue: Double) {
+      red = redSliderValue
+      blue = blueSliderValue
+      green = greenSliderValue
+  }
 }

@@ -52,32 +52,16 @@ struct ContentView: View {
       RoundedRectangle(cornerRadius: 0)
         .foregroundColor(foregroundColor)
         .border(Color.brown, width: 6)
-      VStack {
-        Text("Red")
-        HStack {
-          Slider(value: $redColor, in: 0...255)
-            .tint(Color.red)
-          Text("\(Int(redColor.rounded()))")
-        }
-      }
-      VStack {
-        Text("Green")
-        HStack {
-          Slider(value: $greenColor, in: 0...255)
-            .tint(Color.green)
-          Text("\(Int(greenColor.rounded()))")
-        }
-      }
-      VStack {
-        Text("Blue")
-        HStack {
-          Slider(value: $blueColor, in: 0...255)
-            .tint(Color.blue)
-          Text("\(Int(blueColor.rounded()))")
-        }
-      }
+      
+      SliderView(sliderValue: $redColor, colorName: "Red")
+        .tint(.red)
+      SliderView(sliderValue: $greenColor, colorName: "Green")
+        .tint(.green)
+      SliderView(sliderValue: $blueColor, colorName: "Blue")
+        .tint(.blue)
+      
       Button {
-        foregroundColor = Color(red: redColor / 255, green: greenColor / 255, blue: blueColor / 255)
+        foregroundColor = Color(red: colorSelection.red / 255, green: colorSelection.green / 255, blue: colorSelection.blue / 255)
       } label: {
         Text("Set Color")
           .padding()
@@ -100,15 +84,32 @@ struct ContentView: View {
   }
 }
 
+struct SliderView: View {
+  @Binding var sliderValue: Double
+  var colorName: String
+  
+  var body: some View {
+    VStack {
+      Text(colorName)
+      HStack {
+        Slider(value: $sliderValue, in: 0...255)
+        Text("\(Int(sliderValue.rounded()))")
+      }
+    }
+  }
+}
+
 //struct SliderView: View {
-//  @Binding var
+//  @Binding var colorSelection: ColorSelection
+//  var colorName: String
+//  
 //  var body: some View {
 //    VStack {
-//      Text("Red")
+//      Text(colorName)
 //      HStack {
-//        Slider(value: $redColor, in: 0...255)
+//        Slider(value: $colorSelection, in: 0...255)
 //          .tint(Color.red)
-//        Text("\(Int(redColor.rounded()))")
+//        Text("\(Int(colorSelection.rounded()))")
 //      }
 //    }
 //  }
