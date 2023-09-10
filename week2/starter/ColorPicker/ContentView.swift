@@ -53,6 +53,7 @@ struct ContentView: View {
         Text("Red")
         HStack {
           Slider(value: $redColor, in: 0...255)
+            .tint(Color.red)
           Text("\(Int(redColor.rounded()))")
         }
       }
@@ -60,6 +61,7 @@ struct ContentView: View {
         Text("Green")
         HStack {
           Slider(value: $greenColor, in: 0...255)
+            .tint(Color.green)
           Text("\(Int(greenColor.rounded()))")
         }
       }
@@ -67,14 +69,29 @@ struct ContentView: View {
         Text("Blue")
         HStack {
           Slider(value: $blueColor, in: 0...255)
+            .tint(Color.blue)
           Text("\(Int(blueColor.rounded()))")
         }
       }
-      Button("Set Color") {
+      Button {
         foregroundColor = Color(red: redColor / 255, green: greenColor / 255, blue: blueColor / 255)
+      } label: {
+        Text("Set Color")
+          .padding()
+          .foregroundColor(.white)
       }
+      .background(
+        ZStack {
+          Color.blue
+          LinearGradient(gradient: Gradient(colors: [Color.white.opacity(0.3), Color.clear]), startPoint: .top, endPoint: .bottom)
+        }
+      )
+      .overlay(
+          RoundedRectangle(cornerRadius: 21)
+            .strokeBorder(Color.white, lineWidth: 2)
+          )
+      .cornerRadius(21)
     }
-    .background(Color.white)
     .padding(20)
 
   }
@@ -82,6 +99,12 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView()
+    Group {
+      ContentView()
+        .previewDisplayName("Light Mode")
+      ContentView()
+        .preferredColorScheme(.dark)
+        .previewDisplayName("Dark Mode")
+    }
   }
 }
