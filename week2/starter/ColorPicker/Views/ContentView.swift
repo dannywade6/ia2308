@@ -38,19 +38,66 @@ struct ContentView: View {
   @State private var blueColor: Double = 50.0
   @State private var foregroundColor = Color(red: 250 / 255, green: 100 / 255, blue: 50 / 255)
   
+  @Environment(\.horizontalSizeClass) var horizontalSizeClass
+  @Environment(\.verticalSizeClass) var verticalSizeClass
+  
   var body: some View {
     
-    VStack {
-      MainColorView(title: "Color Picker", foregroundColor: $foregroundColor)
-      SliderView(sliderValue: $redColor, colorName: "Red")
-        .tint(.red)
-      SliderView(sliderValue: $greenColor, colorName: "Green")
-        .tint(.green)
-      SliderView(sliderValue: $blueColor, colorName: "Blue")
-        .tint(.blue)
-      SetColorButtonView(redColor: $redColor, greenColor: $greenColor, blueColor: $blueColor, foregroundColor: $foregroundColor)
+    if verticalSizeClass == .regular && horizontalSizeClass == .compact {
+      PortraitView(redColor: $redColor, greenColor: $greenColor, blueColor: $blueColor, foregroundColor: $foregroundColor)
+    } else {
+      LandscapeView(redColor: $redColor, greenColor: $greenColor, blueColor: $blueColor, foregroundColor: $foregroundColor)
     }
-    .padding(20)
+  }
+}
+
+struct PortraitView: View {
+  @Binding var redColor: Double
+  @Binding var greenColor: Double
+  @Binding var blueColor: Double
+  @Binding var foregroundColor: Color
+  
+  var body: some View {
+    VStack {
+      VStack {
+        MainColorView(title: "Color Picker", foregroundColor: $foregroundColor)
+        SliderView(sliderValue: $redColor, colorName: "Red")
+          .tint(.red)
+        SliderView(sliderValue: $greenColor, colorName: "Green")
+          .tint(.green)
+        SliderView(sliderValue: $blueColor, colorName: "Blue")
+          .tint(.blue)
+        SetColorButtonView(redColor: $redColor, greenColor: $greenColor, blueColor: $blueColor, foregroundColor: $foregroundColor)
+      }
+      .padding(20)
+    }
+  }
+}
+
+struct LandscapeView: View {
+  @Binding var redColor: Double
+  @Binding var greenColor: Double
+  @Binding var blueColor: Double
+  @Binding var foregroundColor: Color
+  
+  var body: some View {
+    HStack {
+      VStack {
+        MainColorView(title: "Color Picker", foregroundColor: $foregroundColor)
+      }
+      .padding()
+      VStack {
+        SliderView(sliderValue: $redColor, colorName: "Red")
+          .tint(.red)
+        SliderView(sliderValue: $greenColor, colorName: "Green")
+          .tint(.green)
+        SliderView(sliderValue: $blueColor, colorName: "Blue")
+          .tint(.blue)
+          .padding(.bottom)
+        SetColorButtonView(redColor: $redColor, greenColor: $greenColor, blueColor: $blueColor, foregroundColor: $foregroundColor)
+      }
+      .padding(.horizontal)
+    }
   }
 }
 
